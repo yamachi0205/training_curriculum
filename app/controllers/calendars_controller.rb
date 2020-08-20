@@ -15,7 +15,7 @@ class CalendarsController < ApplicationController
   private
 
   def plan_params
-    params.require(:calendars).permit(:date, :plan)
+    params.require(:plans).permit(:date, :plan)
   end
 
   def getWeek
@@ -31,7 +31,7 @@ class CalendarsController < ApplicationController
 
     7.times do |x|
       today_plans = []
-      plan = plans.map do |plan|
+      plan = plans.map do |plan| #plansテーブルからplanカラムを全て取得
         today_plans.push(plan.plan) if plan.date == @todays_date + x
       end
       days = { :month => (@todays_date + x).month, :date => (@todays_date+x).day, :plans => today_plans}
